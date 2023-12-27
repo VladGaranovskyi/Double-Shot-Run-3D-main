@@ -1,0 +1,5 @@
+make 2 levels, in the second level add new mode - free run and shoot, if you don't shoot the enemy, he will kill you using his knife or other weapon
+make 1v1 player or robot, replace with the animations icon
+add weapons: choppa, shotty
+7.65
+20.2 273.1

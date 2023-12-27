@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4830880272792789035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4830880272792789029}
+  - component: {fileID: 4830880272792789030}
+  - component: {fileID: 4830880272792789031}
+  - component: {fileID: 4830880272792789028}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4830880272792789029
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4830880272792789035}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4830880272792789030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4830880272792789035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa140f78954de754dba89920c68fbb97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pool:
+  - mention: PlayerBulletPool
+    amountToPool: 240
+    prefab: {fileID: 1733389536284434462, guid: f2dcd3428dc164041b62cd4e0f40df8d, type: 3}
+    PooledObjects: []
+  - mention: EnemyBulletPool
+    amountToPool: 240
+    prefab: {fileID: 1733389536284434462, guid: 25a726df5bd29a346ba4d7ed162dfea1, type: 3}
+    PooledObjects: []
+  - mention: BulletPartsPool
+    amountToPool: 480
+    prefab: {fileID: 846213752792644330, guid: 8c3a2ff7d3036cc4993f347840096c65, type: 3}
+    PooledObjects: []
+--- !u!114 &4830880272792789031
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4830880272792789035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d659c5218f227542a79076d7b1fb23c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4830880272792789028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4830880272792789035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92d8f47ee2ce889418244e756c82180c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _config: {fileID: 11400000, guid: 00f7c27aa4a5a2d4ebfca8411afd63e6, type: 2}
+  _startingPoint: {fileID: 0}
