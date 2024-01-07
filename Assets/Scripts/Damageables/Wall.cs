@@ -6,6 +6,7 @@ public class Wall : MonoBehaviour, IDamageable
     [SerializeField] private Transform _enemy;
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private float _damageMultiplier = 1f;
+    [SerializeField] private AudioSource _hitSound;
     private Transform _player;
     private float health = 50f;
     private float StepDivider;
@@ -18,7 +19,7 @@ public class Wall : MonoBehaviour, IDamageable
 
     private void OnEnable()
     {
-        StepDivider = health * 2f;
+        StepDivider = health * 2f / _damageMultiplier;
     }
 
     private void Update()
@@ -28,6 +29,7 @@ public class Wall : MonoBehaviour, IDamageable
 
     public void ChangeHealth(float val)
     {
+        _hitSound.Play();
         float i = val > 0 ? 1f : -1f;
         health += i * _damageMultiplier;
         transform.position += Vector3.forward * i * _step;

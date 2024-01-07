@@ -11,7 +11,7 @@ public class BulletPropagator : MonoBehaviour
     {
         if (other.TryGetComponent<Bullet>(out _currentBullet))
         {
-            if (_currentBullet.BlockedMultiplierName != name)
+            if (_currentBullet.IsMultiplierNotBlocked(name))
                 _currentBullet.SpreadIntoNBullets(n, name);
         }
     }

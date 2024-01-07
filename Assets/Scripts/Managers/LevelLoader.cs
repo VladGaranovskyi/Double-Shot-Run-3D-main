@@ -9,16 +9,16 @@ public class LevelLoader : MonoBehaviour
         {
             if(PlayerPrefs.GetInt("Level") < 3) 
             {
-                SceneManager.LoadScene($"Level {PlayerPrefs.GetInt("Level")}");
+                SceneManager.LoadSceneAsync($"Level {PlayerPrefs.GetInt("Level")}");
             }
             else
             {
-                SceneManager.LoadScene("Level N");
+                SceneManager.LoadSceneAsync("Level N");
             }
         }
         else
         {
-            SceneManager.LoadScene("Level 1");
+            SceneManager.LoadSceneAsync("Level 1");
         }
     }
 }

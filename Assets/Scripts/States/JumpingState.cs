@@ -21,6 +21,7 @@ namespace States
             _jumpTime = character.GetTime();
             character._animator.SetBool("JumpOverBool", true);
             jumpPeriods = new float[4] { 0, 0, 0, 0};
+            character.playerSound.PlayJump();
             for(int i = 0; i < jumpPeriods.Length; i++)
             {
                 for(int j = 0; j <= i; j++)
@@ -36,6 +37,7 @@ namespace States
             if (character.GetTime() - _jumpTime > jumpPeriods[0] && character.GetTime() - _jumpTime < jumpPeriods[1])
             {
                 character.characterController.height = 2f;
+                character.playerSound.PlayFall();
             }
             else if (character.GetTime() - _jumpTime > jumpPeriods[1] && character.GetTime() - _jumpTime < jumpPeriods[2])
             {

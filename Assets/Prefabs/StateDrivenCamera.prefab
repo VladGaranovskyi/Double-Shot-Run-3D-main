@@ -24,14 +24,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2325822151449223143}
-  m_LocalRotation: {x: 0.0334144, y: -0.6421758, z: 0.028038008, w: 0.76531535}
-  m_LocalPosition: {x: 12.705963, y: -9.681335, z: -147.18555}
+  m_LocalRotation: {x: 0.030843573, y: -0.7064338, z: 0.030843573, w: 0.7064338}
+  m_LocalPosition: {x: 27.705963, y: -9.681335, z: -162.18555}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2325822152544194071}
   m_Father: {fileID: 2325822152364373460}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 5, y: -80, z: 0}
+  m_LocalEulerAnglesHint: {x: 5, y: -90, z: 0}
 --- !u!114 &2325822151449223142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +159,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2325822151824580408}
   m_LocalRotation: {x: 0.2786795, y: -0.36455065, z: 0.116400436, w: 0.8808471}
-  m_LocalPosition: {x: -7.3526287, y: -7.9797363, z: 408.17984}
+  m_LocalPosition: {x: -7.3526287, y: -7.679737, z: 429.67978}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2325822152646010096}
@@ -330,7 +330,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2325822152544194071}
   - component: {fileID: 2325822152544194069}
-  - component: {fileID: 2325822152544194070}
+  - component: {fileID: 359246546}
   m_Layer: 0
   m_Name: cm
   m_TagString: Untagged
@@ -364,7 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2325822152544194070
+--- !u!114 &359246546
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -376,11 +376,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 0
-  m_FollowOffset: {x: 30, y: 10, z: 15}
-  m_XDamping: 2
-  m_YDamping: 2
-  m_ZDamping: 2
+  m_BindingMode: 4
+  m_FollowOffset: {x: 45, y: 10, z: 0}
+  m_XDamping: 1
+  m_YDamping: 1
+  m_ZDamping: 1
   m_AngularDampingMode: 0
   m_PitchDamping: 0
   m_YawDamping: 0
@@ -587,7 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7155796051b734daa718462081dc5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 0
+  m_BindingMode: 4
   m_FollowOffset: {x: 14, y: 6.24, z: -14}
   m_XDamping: 0
   m_YDamping: 0

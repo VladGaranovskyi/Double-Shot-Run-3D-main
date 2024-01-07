@@ -32,7 +32,7 @@ public class EnemyBone : MonoBehaviour
 
     private void ClearBody()
     {
-        Destroy(_ragDoll.Pelvis.gameObject);
-        Destroy(_enemy.gameObject);
+        _ragDoll.Pelvis.gameObject.SetActive(false);
+        _enemy.gameObject.SetActive(false);
     }
 }

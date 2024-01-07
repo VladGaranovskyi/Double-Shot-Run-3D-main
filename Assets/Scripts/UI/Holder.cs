@@ -25,7 +25,6 @@ public class Holder : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDr
         origin = eventData.position;
         CurrentPosition = eventData.position;
         Hold = true;
-        OnTouch?.Invoke();
     }
 
     void IDragHandler.OnDrag(PointerEventData eventData)
@@ -37,5 +36,6 @@ public class Holder : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDr
     { 
         Direction = Vector2.zero;
         Hold = false;
+        OnTouch?.Invoke();
     }
 }

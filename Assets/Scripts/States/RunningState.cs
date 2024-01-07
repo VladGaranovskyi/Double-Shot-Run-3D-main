@@ -13,6 +13,7 @@ namespace States
         {
             base.Enter();
             character._animator.SetBool("JumpOverBool", false);
+            character.playerSound.PlayRun();
         }
 
         public override void PhysicsUpdate()
@@ -29,6 +30,7 @@ namespace States
         public override void Exit()
         {
             base.Enter();
+            character.playerSound.StopRun();
             dirMove = Vector3.zero;
         }
     }

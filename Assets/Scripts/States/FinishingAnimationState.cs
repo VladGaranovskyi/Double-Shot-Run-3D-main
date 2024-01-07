@@ -41,6 +41,7 @@ namespace States
                 character.playerAnimator.animator.enabled = false;
                 character._shootControls.shooter.PerformShoot();
                 character.playerAnimator.PlayAnimationShoot();
+                character.playerSound.PlayShoot();
                 Doll.Pelvis.velocity = Vector3.forward;
                 Doll.ChangeRagDollState(true);
                 Doll.ApplyForce(Vector3.forward * (Score < character.defaultForceFinish / Doll.Koefficient ? character.defaultForceFinish / Doll.Koefficient : Score));

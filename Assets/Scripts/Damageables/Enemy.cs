@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float _shootAnimationInterval;
     [SerializeField] protected Animator _animator;
     [SerializeField] protected float _shootCoolDown;
+    [SerializeField] protected AudioSource _shootSound;
+    [SerializeField] protected AudioSource _deathSound;
     [HideInInspector] public float bulletsCount;
     protected float _startForeArmZ;
     protected float _changeForeArmZ;
@@ -27,6 +29,7 @@ public class Enemy : MonoBehaviour
         _bullet.enemy = this;
         _bullet.gameObject.SetActive(true);
         foreach (var effect in shootEffects) effect.Play();
+        _shootSound.Play();
         _animator.enabled = false;
         _startForeArmZ = _rightForeArm.eulerAngles.z;
         _changeForeArmZ = _startForeArmZ - 15f;
@@ -46,6 +49,12 @@ public class Enemy : MonoBehaviour
     private void OnEnable()
     {
         _enableTime = Time.time;
+        _deathSound.transform.parent = null;
+    }
+
+    private void OnDisable()
+    {
+        _deathSound.Play();
     }
 
     protected void RotateBackward()

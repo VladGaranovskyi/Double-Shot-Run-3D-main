@@ -5,11 +5,11 @@ public class MovingObstacle : MonoBehaviour
 {
     [SerializeField] private float _distance;
     [SerializeField] private float _speed;
-    [SerializeField] private Rigidbody _rb;
+    private Rigidbody _rb;
     private Vector3 _startPos;
     private float multiplier = 1f;
 
-    private void Awake()
+    private void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _distance = _distance * _distance;
@@ -22,6 +22,6 @@ public class MovingObstacle : MonoBehaviour
         {
             multiplier = -multiplier;
         }
-        _rb.MovePosition(transform.position + transform.forward * Time.deltaTime * _speed * multiplier);
+        _rb.MovePosition(transform.position + transform.up * Time.deltaTime * _speed * multiplier);
     }
 }

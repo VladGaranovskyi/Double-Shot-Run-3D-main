@@ -52,14 +52,19 @@ public class LevelManager : MonoBehaviour
 
     public void EndGame()
     {
-        PlayerPrefs.SetInt("Coins", Mathf.RoundToInt(_playerController.Coins * Multiplier));
+        PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + Mathf.RoundToInt(_playerController.Coins * Multiplier));
         if (PlayerPrefs.HasKey("Level"))
         {
             PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
+            if(PlayerPrefs.GetInt("Level") > 2)
+            {
+                PlayerPrefs.DeleteKey("Level Config");
+            }
         }
         else
         {
             PlayerPrefs.SetInt("Level", 2);
         }
+        SceneManager.LoadScene("Loading");
     }
 }

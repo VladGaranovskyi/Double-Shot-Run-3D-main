@@ -35,6 +35,21 @@ public class ShootControls : MonoBehaviour
         return hit;
     }
 
+    public RaycastHit GetHitFromPistol(LayerMask layer)
+    {
+        RaycastHit[] hits;
+        Ray ray = new Ray(_shootPoint.position, _shootPoint.forward);
+        hits = Physics.RaycastAll(ray, Mathf.Infinity, layer);
+        for(int i = hits.Length - 1; i >= 0; i--)
+        {
+            if (hits[i].collider.gameObject.GetComponent<EnemyBone>() == null && hits[i].collider.gameObject.GetComponent<BulletPropagator>() == null && hits[i].collider.tag != "Border")
+            {
+                return hits[i];
+            }
+        }
+        return hits[0];
+    }
+
     public RaycastHit[] GetHitsFromPistol()
     {
         RaycastHit[] rh = new RaycastHit[2];
@@ -45,7 +60,19 @@ public class ShootControls : MonoBehaviour
         Physics.Raycast(ray, out newHit, Mathf.Infinity, _bulletLayer);
         rh[1] = newHit;
         return rh;
-    }  
+    }
+
+    public RaycastHit[] GetHitsFromPistol(LayerMask layer)
+    {
+        RaycastHit[] rh = new RaycastHit[2];
+        RaycastHit hit = GetHitFromPistol(layer);
+        rh[0] = hit;
+        RaycastHit newHit;
+        Ray ray = new Ray(hit.point, Vector3.Reflect((hit.point - _shootPoint.position).normalized, hit.normal));
+        Physics.Raycast(ray, out newHit, Mathf.Infinity, layer);
+        rh[1] = newHit;
+        return rh;
+    }
 
     public Transform GetShootPoint() { return _shootPoint; }
     public Transform GetSpine() { return _spine; }

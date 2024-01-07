@@ -22,7 +22,8 @@ public class Shooter : MonoBehaviour
         bullet.playerController = _playerController;
         bullet.gameObject.SetActive(true);
         bullet.Damage = -bullet.Damage;
-        _playerController.wallCam.Follow = bullet.transform;
+        //_playerController.wallCam.Follow = bullet.transform;
+        _playerController.playerSound.PlayShoot();
         PerformShoot();
         _shootControls.lineRenderer.SetPosition(0, Vector3.zero);
         _shootControls.lineRenderer.SetPosition(1, Vector3.zero);
@@ -39,7 +40,11 @@ public class Shooter : MonoBehaviour
         bullet.transform.forward = _shootPoint.forward;
         bullet.playerController = _playerController;
         bullet.gameObject.SetActive(true);
+        _playerController.playerSound.PlayShoot(); 
         PerformShoot();
+        _shootControls.lineRenderer.SetPosition(0, Vector3.zero);
+        _shootControls.lineRenderer.SetPosition(1, Vector3.zero);
+        _shootControls.lineRenderer.SetPosition(2, Vector3.zero);
     }
 
     public void PerformShoot()

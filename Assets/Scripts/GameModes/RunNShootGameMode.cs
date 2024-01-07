@@ -21,11 +21,15 @@ namespace GameModes
         {
             foreach (GameObject enemy in _enemies)
             {
-                Destroy(enemy);
+                if(enemy != null)
+                {
+                    enemy.SetActive(false);
+                }
             }
             _playerController.stateMachine.ChangeState(_playerController.runningState);
             _playerController.playerAnimator.SwitchToNormalLayer();
             _playerController.stateDrivenCameraAnimator.Play("Default");
+            _playerController.playerHealth.HealthDisplayer.SetActive(false);
         }
 
         public void RewardPlayerForElimination(int reward)
@@ -46,9 +50,10 @@ namespace GameModes
                 enemy.SetActive(true);
             }
             _playerController.playerHealth.RestoreHealth();
+            _playerController.playerHealth.HealthDisplayer.SetActive(true);
         }
 
-        public bool IsGameLost() => _playerController.playerHealth.health < 0;
+        public bool IsGameLost() => _playerController.playerHealth.Health <= 0;
 
         public bool IsGameWon() => _playerController.transform.position.z > _destination.position.z;
     }

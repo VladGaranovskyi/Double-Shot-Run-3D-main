@@ -24,4 +24,8 @@ public class MenuCoinsDisplayer : MonoBehaviour
         _coinsText = GetComponent<Text>();
         _coinsText.text = Coins.ToString();
     }
+    private void Update()
+    {
+        _coinsText.text = Coins.ToString();
+    }
 }

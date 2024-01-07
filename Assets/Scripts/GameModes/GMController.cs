@@ -29,6 +29,11 @@ public class GMController : MonoBehaviour
             }
             else if (currentGameMode.IsGameLost())
             {
+                _playerController.playerSound.PlayDeath();
+                currentGameMode.EndGame();
+                currentGameMode = null;
+                ObjectPool.instance.DisablePooledObjects("PlayerBulletPool");
+                ObjectPool.instance.DisablePooledObjects("EnemyBulletPool");
                 LevelManager.instance.ShowLooseUI();
                 enabled = false;
             }           

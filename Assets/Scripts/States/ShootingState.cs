@@ -7,7 +7,6 @@ namespace States
     public class ShootingState : State
     {
         private GameMode _currentGameMode;
-        private float _shootTime;
         public int bulletsCount;
         public ShootingState(PlayerController charachter, StateMachine stateMachine) : base(charachter, stateMachine)
         {
@@ -18,7 +17,6 @@ namespace States
             base.Enter();
             character.playerAnimator.PlayAnimationShoot();
             _currentGameMode = GMController.instance.currentGameMode;
-            _shootTime = character.GetTime();
             character.characterController.enabled = false;
             switch (_currentGameMode.GetModeState())
             {
@@ -26,25 +24,22 @@ namespace States
                     character.stateDrivenCameraAnimator.Play("Wall");
                     break;
             }
+            character.wallCam.Follow = _currentGameMode.GetGameObject().GetComponentInChildren<Wall>().transform;
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            switch (_currentGameMode.GetModeState())
+            /*switch (_currentGameMode.GetModeState())
             {
                 case State_Type.VerticalScoping:
-                    if(character.GetTime() - _shootTime > 15f)
-                    {
-                        ObjectPool.instance.DisablePooledObjects("PlayerBulletPool");
-                    }
                     if (!character.wallCam.Follow.gameObject.activeInHierarchy && bulletsCount > 0)
                     {
                         character.wallCam.Follow = ObjectPool.instance.GetActivePooledObject<Transform>("PlayerBulletPool");
                     }
+                    character.wallCam.Follow = _currentGameMode.GetGameObject().GetComponentInChildren<Wall>().transform;
                     break;
-            }
-
+            }*/
             if (bulletsCount <= 0 && !_currentGameMode.IsGameWon())
             {
                 switch (_currentGameMode.GetModeState())

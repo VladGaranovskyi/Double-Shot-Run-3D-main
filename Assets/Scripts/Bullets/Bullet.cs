@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 internal class BulletVectors
 {
@@ -60,6 +61,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private string _currentTag;
     [SerializeField] private float _firstSplitAngle;
     [SerializeField] private Transform _bulletPrefab;
+    [SerializeField] private AudioSource _hitSound;
     private Queue<GameObject> _particles = new Queue<GameObject>();
     private float _startDamage;
     public PlayerController playerController { private get; set; }
@@ -72,12 +74,17 @@ public class Bullet : MonoBehaviour
     public void SetBulletTag(string newTag) => _currentTag = newTag;
 
     public string GetBulletTag() => _currentTag;
-
-    public string BlockedMultiplierName { get; private set; }
+    private List<string> blockedMultipliersNames = new List<string>();
 
     private void Awake()
     {
         _startDamage = _damage;
+    }
+
+    public bool IsMultiplierNotBlocked(string multiplierName)
+    {
+        if (blockedMultipliersNames.Count == 0) return true;       
+        return !blockedMultipliersNames.Contains(multiplierName);
     }
 
     private void OnEnable()
@@ -96,6 +103,7 @@ public class Bullet : MonoBehaviour
             ChangeBulletCount(-1);
         }
         _damage = _startDamage;
+        blockedMultipliersNames = new List<string>();
     }
 
     private void ChangeBulletCount(int c)
@@ -120,19 +128,20 @@ public class Bullet : MonoBehaviour
     {
         if (collision.transform.GetComponent<Bullet>() == null)
         {
-            ParticleSystem parts = ObjectPool.instance.GetPooledObject<ParticleSystem>("BulletPartsPool");
-            parts.transform.position = transform.position;
-            parts.gameObject.SetActive(true);
-            _particles.Enqueue(parts.gameObject);
-            parts.Play();
-            Invoke("DequeuePart", parts.main.startLifetime.constant);
-            if(collision.transform.TryGetComponent<IDamageable>(out _damageable))
+            if (collision.collider.TryGetComponent<IDamageable>(out _damageable))
             {
                 _damageable.ChangeHealth(-_damage);
+                ParticleSystem parts = ObjectPool.instance.GetPooledObject<ParticleSystem>("BulletPartsPool");
+                parts.transform.position = transform.position;
+                parts.gameObject.SetActive(true);
+                _particles.Enqueue(parts.gameObject);
+                parts.Play();
+                Invoke("DequeuePart", parts.main.startLifetime.constant);
                 gameObject.SetActive(false);
             }
             else
             {
+                _hitSound.Play();
                 transform.forward = Vector3.Reflect(transform.forward, collision.contacts[0].normal);
             }
         }
@@ -141,12 +150,13 @@ public class Bullet : MonoBehaviour
     public void SplitIntoNBullets(int count, string multiplierName)
     {
         List<Vector3> normals = _bulletVectors.GetVectors(count, transform.forward);
+        blockedMultipliersNames.Add(multiplierName);
         foreach(var normal in normals)
         {
             Bullet bullet = ObjectPool.instance.GetPooledObject<Bullet>(_currentTag + "Pool");
             bullet.transform.position = transform.position;
             bullet.transform.forward = normal;
-            bullet.BlockedMultiplierName = multiplierName;
+            bullet.blockedMultipliersNames = blockedMultipliersNames.Select(e => e).ToList<string>();
             bullet.playerController = playerController;
             bullet.enemy = enemy;
             bullet.Damage = _damage;
@@ -157,6 +167,7 @@ public class Bullet : MonoBehaviour
 
     public void SpreadIntoNBullets(int count, string multiplierName)
     {
+        blockedMultipliersNames.Add(multiplierName);
         for(int i = 1; i < count; i++)
         {
             Bullet bullet = ObjectPool.instance.GetPooledObject<Bullet>(_currentTag + "Pool");
@@ -164,7 +175,7 @@ public class Bullet : MonoBehaviour
             bullet.transform.forward = transform.forward;
             bullet.transform.position += transform.right * Random.Range(-1f, 1f);
             bullet.transform.position += transform.up * Random.Range(-1f, 1f);
-            bullet.BlockedMultiplierName = multiplierName;
+            bullet.blockedMultipliersNames = blockedMultipliersNames.Select(e => e).ToList<string>();
             bullet.playerController = playerController;
             bullet.enemy = enemy;
             bullet.Damage = _damage;

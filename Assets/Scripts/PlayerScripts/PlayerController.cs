@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
     public Camera Cam { get; private set; }
     public MultiplyingTilesSpawner _tilesSpawner { get; private set; }
     public PlayerHealth playerHealth { get; private set; }
+    public PlayerSound playerSound { get; private set; }
 
     public float GetTime() => Time.time;
     public float GetJumpHeight() => _jumpHeight;
@@ -80,8 +81,9 @@ public class PlayerController : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
         playerAnimator = GetComponent<PlayerAnimator>();
         _tilesSpawner = FindObjectOfType<MultiplyingTilesSpawner>();
-        Cam = Camera.main;
         playerHealth = GetComponent<PlayerHealth>();
+        playerSound = GetComponent<PlayerSound>();
+        Cam = Camera.main;
         _defaultCharachterHeight = characterController.height;
 
         stateMachine = new StateMachine();

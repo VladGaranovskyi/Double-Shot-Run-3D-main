@@ -19,7 +19,13 @@ public class BodyRotater : MonoBehaviour
 
     public void MoveSpine(float y)
     {
-        _spine.eulerAngles = Vector3.right * Mathf.Clamp(y / n, -border, border) * k /* *Time.deltaTime*/;
+        _spine.eulerAngles = Vector3.right * Mathf.Clamp((y - (Screen.height / 2f)) / n, -border, border) * k /* *Time.deltaTime*/;
         _pistol.forward = new Vector3(0f, _pistol.forward.y, _pistol.forward.z);
+    }
+
+    public void LookAtPoint(Vector3 point)
+    {
+        _shootControls.GetSpine().forward = (point - _shootControls.GetSpine().position).normalized;
+        _shootControls.GetPistol().forward = (point - _shootControls.GetPistol().position).normalized;
     }
 }

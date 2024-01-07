@@ -9,8 +9,20 @@ namespace States
         private float _shootTime;
         private bool IsShoot;
         private const float MASS = 5f;
+        private RaycastHit _currentHit;
         public RunNScopingState(PlayerController charachter, StateMachine stateMachine) : base(charachter, stateMachine)
         {
+        }
+
+        private void Shoot() 
+        {
+            if (IsShoot)
+            {
+                IsShoot = false;
+                Time.timeScale = 1f;
+                character._shootControls.shooter.Shoot(_currentHit.point);
+                _shootTime = Time.time;
+            }
         }
 
         public override void Enter()
@@ -18,6 +30,8 @@ namespace States
             base.Enter();
             character.playerAnimator.SwitchToUpperLowerLayer();
             character.stateDrivenCameraAnimator.Play("Behind");
+            Holder.instance.OnTouch += Shoot;
+            character.playerSound.PlayRun();
         }
 
         public override void HandleInput()
@@ -43,15 +57,22 @@ namespace States
             character.characterController.Move(dirMove * Time.deltaTime);
             if (IsShoot)
             {
-                RaycastHit hit;
+                Time.timeScale = 0.25f;
                 Ray ray = character.Cam.ScreenPointToRay(_currentPosition);
-                if(Physics.Raycast(ray, out hit, Mathf.Infinity, character._shootControls.TargetLayer))
+                if(Physics.Raycast(ray, out _currentHit, Mathf.Infinity, character._shootControls.TargetLayer))
                 {
-                    character._shootControls.shooter.Shoot(hit.point);
-                    IsShoot = false;
-                    _shootTime = Time.time;
+                    character._shootControls.bodyRotater.LookAtPoint(_currentHit.point);
+                    character._shootControls.laserProjector.ShowLaserPistol(character._shootControls.TargetLayer);
                 }
             }
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            Holder.instance.OnTouch -= Shoot;
+            character.playerSound.StopRun();
+            Shoot();
         }
     }
 }

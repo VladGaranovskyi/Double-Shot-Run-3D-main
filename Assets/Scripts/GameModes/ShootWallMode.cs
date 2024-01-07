@@ -15,6 +15,8 @@ namespace GameModes
         [Space]
         [SerializeField] private int reward = 25;
         [SerializeField] private Transform _floor;
+        [SerializeField] private AudioSource _winSound;
+        [SerializeField] private AudioSource _startSound;
         private PlayerController _playerController;
 
         public Transform Floor => _floor;
@@ -28,20 +30,26 @@ namespace GameModes
 
         public void InitializeGame()
         {
-            foreach(var part in _transitionParticles) part.Play();
+            _startSound.Play();
+            foreach (var part in _transitionParticles) part.Play();
             foreach (Transform child in _children)
             {
                 child.gameObject.SetActive(true);
-                child.parent = null;
+                //child.parent = null;
+            }
+            for(int i = 0; i < _playerController.playerHealth.Health; i++)
+            {
+                _wall.ChangeHealth(1f);
             }
         }
 
         public void EndGame()
         {
+            _winSound.Play();
             foreach (var part in _transitionParticles) part.Play();
             foreach (Transform child in _children)
             {
-                child.parent = transform;
+                //child.parent = transform;
                 child.gameObject.SetActive(false);
             }
             _playerController.stateMachine.ChangeState(_playerController.runningState);

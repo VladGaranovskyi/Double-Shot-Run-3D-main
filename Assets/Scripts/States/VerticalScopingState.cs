@@ -16,6 +16,7 @@ namespace States
         public override void Enter()
         {
             base.Enter();
+            character.shootingState.bulletsCount = 0;
             character._animator.enabled = false;
             IsScoping = true;
         }
