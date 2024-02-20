@@ -7,8 +7,13 @@ This is a casual shooter game. There are 2 game modes:
 The main goal is to go to the finish alive and shoot the main level enemy.
 
 Controls were written using StateMachine pattern.
+
 ## Usage
 Download or clone this repository. Use Unity 2022.3.20f1 version or higher. Unity should automatically download every extension.
+
+## Links
+![Google Play](https://play.google.com/store/apps/details?id=com.Ezzzz4.DoubleShotRun3D)
+![Web](https://ezzzz4.itch.io/double-shot-run-3d)
 
 Here are the screenshots:
 
