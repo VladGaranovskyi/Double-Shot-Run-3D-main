@@ -12,8 +12,9 @@ Controls were written using StateMachine pattern.
 Download or clone this repository. Use Unity 2022.3.20f1 version or higher. Unity should automatically download every extension.
 
 ## Links
-![Google Play](https://play.google.com/store/apps/details?id=com.Ezzzz4.DoubleShotRun3D)
-![Web](https://ezzzz4.itch.io/double-shot-run-3d)
+<a href="https://ezzzz4.itch.io/double-shot-run-3d">Web Version</a>
+<br>
+<a href="https://play.google.com/store/apps/details?id=com.Ezzzz4.DoubleShotRun3D">Google Play Version</a>
 
 Here are the screenshots:
 
